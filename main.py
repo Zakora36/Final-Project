@@ -1,5 +1,3 @@
-#first two features: one that shows your data and one that adds or updates your data
-
 #Temp Dictionary
 case_info = { 
     "#CR-1234": {"Client": "John Doe", "Court": "Great Falls Municipal Court", "Billing Rate": 80.00}, 
@@ -9,6 +7,7 @@ case_info = {
 
 client_hours = {}
 
+#Shows the clients info from dictionary
 def show_clients():
     print("\n======= CLIENT LIST =======")
 
@@ -18,8 +17,32 @@ def show_clients():
         print(f"Court: {details['Court']}")
         print(f"Billing Rate: ${details['Billing Rate']:.2f}")
 
+#Add the units of hours to specified clients
+def add_hours():
+    print("\n======= ADD CLIENT HOURS =======")
 
+    case_number = input("Enter Case Number: ")
 
+    if case_number not in case_info:
+        print(f"Case number({case_number}) not found.")
+        return
+
+    try:
+        hours = float(input("Enter Hours Worked: "))
+
+    except ValueError:
+        print("Invalid input. Please enter a number.")
+        return
+
+    if case_number not in client_hours:
+        client_hours[case_number] = []
+
+    client_hours[case_number].append(hours)
+    print()
+    print(f"Added {hours} hours to {case_number}.")
+    print(f"Client: {case_info[case_number]['Client']}")
+
+#Display the menu options to user    
 def show_menu():
     print("\n======= LAW FIRM BILLING SYSTEM =======")
     print("1. Show Client List")
@@ -47,21 +70,21 @@ while True:
         add_hours()
 
     elif menu_option == "3":
-        print("n/c update_rate()")
+        print("Coming soon")
     elif menu_option == "4":
-        print("n/c show_client_entires()")
+        print("Coming soon")
     elif menu_option == "5":
-        print("n/c calc_rate_total()")
+        print("Coming soon")
     elif menu_option == "6":
-        print("n/c calc_month_total()")   
+        print("Coming soon")   
     elif menu_option == "7":
-        print("n/c add_month()")   
+        print("Coming soon")   
     elif menu_option == "8":
-        print("n/c load_past_month()")  
+        print("Coming soon")  
     elif menu_option == "9":
-        print("n/c generate_annual_report()")  
+        print("Coming soon")  
     elif menu_option == "10":
-        print("n/c run_simulation()")
+        print("Coming soon")
     elif menu_option == "11":
         print("Menu Closed")  
         break
