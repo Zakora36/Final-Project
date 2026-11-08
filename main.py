@@ -1,5 +1,25 @@
 #first two features: one that shows your data and one that adds or updates your data
 
+#Temp Dictionary
+case_info = { 
+    "#CR-1234": {"Client": "John Doe", "Court": "Great Falls Municipal Court", "Billing Rate": 80.00}, 
+    "#TK-45678": {"Client": "Jane Doe", "Court": "Cascade County Justice Court", "Billing Rate": 80.00},
+    "#CR-23455": {"Client": "Person Last", "Court": "Great Falls Municipal Court", "Billing Rate": 80.00}
+} 
+
+client_hours = {}
+
+def show_clients():
+    print("\n======= CLIENT LIST =======")
+
+    for case_number, details in case_info.items():
+        print(f"\nCase Number: {case_number}")
+        print(f"Client: {details['Client']}")
+        print(f"Court: {details['Court']}")
+        print(f"Billing Rate: ${details['Billing Rate']:.2f}")
+
+
+
 def show_menu():
     print("\n======= LAW FIRM BILLING SYSTEM =======")
     print("1. Show Client List")
