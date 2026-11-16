@@ -1,11 +1,48 @@
-#Temp Dictionary
-case_info = { 
-    "#CR-1234": {"Client": "John Doe", "Court": "Great Falls Municipal Court", "Billing Rate": 80.00}, 
-    "#TK-45678": {"Client": "Jane Doe", "Court": "Cascade County Justice Court", "Billing Rate": 80.00},
-    "#CR-23455": {"Client": "Person Last", "Court": "Great Falls Municipal Court", "Billing Rate": 80.00}
-} 
+
 
 client_hours = {}
+
+def load_cases():
+    global case_info
+    case_info = {}
+
+    try:
+        with open("cases.csv", "r") as file:
+            next(file)  # Skip the header
+
+            for line in file:
+                line = line.strip()
+                case_number, client, court, rate = line.split(",")
+
+                case_info[case_number] = {
+                    "Client": client,
+                    "Court": court,
+                    "Billing Rate": float(rate)
+                }
+
+    except FileNotFoundError:
+        print("No existing case file found.")
+
+    return case_info
+
+
+def save_cases():
+    with open("cases.csv", "w") as file:
+
+        file.write("Case Number,Client,Court,Billing Rate\n")
+
+        for case_number, details in case_info.items():
+            line = (
+                case_number + "," +
+                details["Client"] + "," +
+                details["Court"] + "," +
+                str(details["Billing Rate"]) + "\n"
+            )
+
+            file.write(line)
+
+    print("Cases saved successfully!")
+
 
 #Shows the clients info from dictionary
 def show_clients():
@@ -58,6 +95,7 @@ def show_menu():
     print("11. Save and Exit")
 
     
+load_cases()
 
 while True:
     show_menu()
@@ -68,7 +106,7 @@ while True:
         show_clients()
     elif menu_option == "2":
         add_hours()
-
+        
     elif menu_option == "3":
         print("Coming soon")
     elif menu_option == "4":
@@ -87,6 +125,7 @@ while True:
         print("Coming soon")
     elif menu_option == "11":
         print("Menu Closed")  
+        save_cases()
         break
     else:
         print("Please enter the commands number(1-11)")
